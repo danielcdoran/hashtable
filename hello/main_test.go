@@ -30,3 +30,26 @@ func TestGivenSameIndex_then_UpdateData(t *testing.T) {
 		t.Errorf("got %q, expected %q", actual, "nextstring")
 	}
 }
+
+func TestGivenAddedInReverseOrder_then_DataReturned(t *testing.T) {
+	list := LinkedList{}
+	list.insert(12, "12string")
+	list.insert(9, "9string")
+	list.insert(3, "3string")
+	actual, _ := list.get(3)
+	if actual != "3string" {
+		t.Errorf("got %q, expected %q", actual, "3string")
+	}
+}
+
+func TestLargestIndex_then_AddToEnd(t *testing.T) {
+	list := LinkedList{}
+	list.insert(1, "1string")
+	list.insert(9, "9string")
+	list.insert(33, "33string")
+	list.Display()
+	actual, _ := list.get(33)
+	if actual != "33string" {
+		t.Errorf("got %q, expected %q", actual, "33string")
+	}
+}

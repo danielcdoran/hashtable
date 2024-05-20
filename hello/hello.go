@@ -51,13 +51,23 @@ func (list *LinkedList) insert(index int, data string) {
 		list.head = newNode
 		return
 	}
-
+	var prevNode *Node
 	current := list.head
-	for {
+	for current.next != nil {
 		if current.index == index {
 			current.data = data
 			break
 		}
+		if index < current.index {
+			newNode.next = current
+			if prevNode == nil {
+				list.head = newNode
+			} else {
+				prevNode.next = current
+			}
+			return
+		}
+		prevNode = current
 		current = current.next
 	}
 
@@ -65,7 +75,7 @@ func (list *LinkedList) insert(index int, data string) {
 }
 
 // Assumes items are ordered in bucket by increasing index
-func (list *LinkedList) get(index int) (string, error) {
+func (list LinkedList) get(index int) (string, error) {
 
 	if list.head == nil {
 		return "", errors.New("not found")

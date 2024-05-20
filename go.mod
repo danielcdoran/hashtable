@@ -1,3 +1,3 @@
-module github.com/microsoft/vscode-remote-try-go
+module github.com/microsoft/hashtable
 
 go 1.19
