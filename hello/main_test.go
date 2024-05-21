@@ -53,3 +53,27 @@ func TestLargestIndex_then_AddToEnd(t *testing.T) {
 		t.Errorf("got %q, expected %q", actual, "33string")
 	}
 }
+
+func TestSingleItemPerBucket_then_return(t *testing.T) {
+	hash := Hash{}
+	hash.insert(11, "11string") // bucket 11
+	hash.insert(43, "43string") // bucket 21
+	hash.insert(62, "62string") // bucket 18
+	hash.Display()
+	actual, _ := hash.get(43)
+	if actual != "43string" {
+		t.Errorf("got %q, expected %q", actual, "43string")
+	}
+}
+
+func TestMultipleItemPerBucket_then_return(t *testing.T) {
+	hash := Hash{}
+	hash.insert(11, "11string") // bucket 11
+	hash.insert(33, "33string") // bucket 21
+	hash.insert(55, "55string") // bucket 18
+	hash.Display()
+	actual, _ := hash.get(55)
+	if actual != "55string" {
+		t.Errorf("got %q, expected %q", actual, "55string")
+	}
+}

@@ -94,6 +94,36 @@ func (list LinkedList) get(index int) (string, error) {
 	return "", errors.New("not found")
 }
 
+// User user type
+type Hash struct {
+	entries [23]LinkedList
+}
+
+func (hash *Hash) insert(index int, data string) {
+	bucketSize := len(hash.entries) - 1
+	bucket := index % bucketSize
+	linkedList := hash.entries[bucket]
+	linkedList.insert(index, data)
+	hash.entries[bucket] = linkedList
+}
+
+// Assumes items are ordered in bucket by increasing index
+func (hash *Hash) get(index int) (string, error) {
+	bucketSize := len(hash.entries) - 1
+	bucket := index % bucketSize
+	linkedList := hash.entries[bucket]
+	return linkedList.get(index)
+}
+
+func (list Hash) Display() {
+	current := list.entries
+	for i, s := range current {
+		fmt.Printf("bucket %d", i)
+		s.Display()
+	}
+	fmt.Println()
+}
+
 var alex = User{}
 
 // Hello writes a welcome string
